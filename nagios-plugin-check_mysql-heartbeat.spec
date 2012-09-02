@@ -4,7 +4,7 @@
 Summary:	Nagios plugin to check MySQL heartbeat
 Name:		nagios-plugin-%{plugin}
 Version:	1.0
-Release:	0.1
+Release:	1
 License:	GPL v2
 Group:		Networking
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
@@ -20,7 +20,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_cvsmodule	nagios/plugins
 
 %description
-Nagios plugin to check MySQL heartbeat with maatkit or percona-toolkit.
+Nagios plugin to check MySQL heartbeat with maatkit or
+percona-toolkit.
 
 %prep
 # check early if build is ok to be performed
