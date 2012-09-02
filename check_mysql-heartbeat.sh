@@ -28,10 +28,16 @@ usage() {
 	cat >&2 <<EOF
 Usage: check_mysql-heartbeat
 
-    --mk | --maatkit
+    --mk, --maatkit
        Uses maatkit: mk-heartbeat
-    --pt | --percona-toolkit
+    --pt, --percona-toolkit
        Uses percona-toolkit: pt-hearbeat
+
+    -H HOSTNAME, --host HOSTNAME
+    -P PORT, --port PORT
+    -u USERNAME, --username USERNAME
+    -p PASSWORD, --password PASSWORD
+    -D DATABASE, --database DATABASE
 EOF
 }
 
