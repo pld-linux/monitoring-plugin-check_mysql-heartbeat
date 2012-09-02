@@ -35,8 +35,16 @@ Usage: check_mysql-heartbeat
 EOF
 }
 
+# Parse arguments
+args=$(getopt -o hVH:P:u:p:D: --long help,version,mk,maatkit,pt,percona-tookit,host:,port:,username:,password:,database: -u -n $PROGRAM -- "$@")
+if [ $? != 0 ]; then
+	usage
+	exit 1
+fi
+eval set -- "$args"
+
 ## Start of main program ##
-while [ $# -gt 0 ]; do
+while :; do
 	case "$1" in
 	-h|--help)
 		usage
@@ -71,6 +79,13 @@ while [ $# -gt 0 ]; do
 	-D|--database)
 		shift
 		database=$1
+		;;
+	--)
+		shift
+		break
+		;;
+	*)
+		die UNKNOWN "Internal error: [$1] Not recognized!"
 		;;
 	esac
 	shift
