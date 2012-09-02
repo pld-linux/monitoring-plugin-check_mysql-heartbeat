@@ -16,11 +16,13 @@ port=
 username=
 password=
 database=
+warning=200
+critical=400
 
 die() {
 	eval local rc=\$STATE_$1
 	[ "$rc" ] || rc=$STATE_UNKNOWN
-	echo "$2"
+	echo "$1: $2"
 	exit $rc
 }
 
@@ -33,6 +35,8 @@ Usage: check_mysql-heartbeat
     --pt, --percona-toolkit
        Uses percona-toolkit: pt-hearbeat
 
+    -w SECONDS, --warning SECONDS
+    -c SECONDS,--critical SECONDS
     -H HOSTNAME, --host HOSTNAME
     -P PORT, --port PORT
     -u USERNAME, --username USERNAME
@@ -42,7 +46,7 @@ EOF
 }
 
 # Parse arguments
-args=$(getopt -o hVH:P:u:p:D: --long help,version,mk,maatkit,pt,percona-tookit,host:,port:,username:,password:,database: -u -n $PROGRAM -- "$@")
+args=$(getopt -o hVw:c:H:P:u:p:D: --long help,version,warning:,critical:,mk,maatkit,pt,percona-tookit,host:,port:,username:,password:,database: -u -n $PROGRAM -- "$@")
 if [ $? != 0 ]; then
 	usage
 	exit 1
@@ -65,6 +69,14 @@ while :; do
 		;;
 	--pt|--percona-toolkit)
 		heartbeat=mk-heartbeat
+		;;
+	-c|--critical)
+		shift
+		critical=$1
+		;;
+	-w|--warning)
+		shift
+		warning=$1
 		;;
 	-H|--host)
 		shift
@@ -101,9 +113,18 @@ if [ -z "$hostname" ]; then
 	die UNKNOWN "No hostname given"
 fi
 
-out=$($heartbeat ${database:+-D $database} --check -h $hostname ${username:+-u $username} ${password:+-p $password} 2>&1)
+# check out config errors
+if [ $warning -gt $critical ]; then
+	die UNKNOWN "Warning level bigger than critical level"
+fi
+
+secs=$($heartbeat ${database:+-D $database} --check -h $hostname ${username:+-u $username} ${password:+-p $password} 2>&1)
 rc=$?
 if [ "$rc" != 0 ]; then
-	die UNKNOWN "$out"
+	die UNKNOWN "$secs"
 fi
-die OK "OK $heartbeat on $hostname @$out"
+
+[ $secs -gt $critical ] && die CRITICAL "$heartbeat on $hostname $secs seconds over critical treshold $critical seconds"
+[ $secs -gt $warning ] && die WARNING "$heartbeat on $hostname $secs seconds over warning treshold $warning seconds"
+
+die OK "$heartbeat on $hostname @$secs seconds"
