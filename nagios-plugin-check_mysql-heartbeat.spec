@@ -4,7 +4,7 @@
 Summary:	Nagios plugin to check MySQL heartbeat
 Name:		nagios-plugin-%{plugin}
 Version:	1.0
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Networking
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
@@ -36,7 +36,7 @@ cd -
 %endif
 %setup -qTc
 cd ..
-cvs -d %{_cvsroot} co -d %{name}-%{version} %{_cvsmodule}/%{plugin}
+cvs -d %{_cvsroot} co -d %{name}-%{version} %{_cvsmodule}/%{plugin}.sh
 cd -
 cvs up %{plugin}.cfg
 
@@ -60,7 +60,7 @@ cvs tag $tag
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{plugindir}}
-install -p %{plugin} $RPM_BUILD_ROOT%{plugindir}
+install -p %{plugin}.sh $RPM_BUILD_ROOT%{plugindir}/%{plugin}
 cp -p %{plugin}.cfg $RPM_BUILD_ROOT%{_sysconfdir}/%{plugin}.cfg
 
 %clean
