@@ -28,7 +28,7 @@ die() {
 
 usage() {
 	cat >&2 <<EOF
-Usage: check_mysql-heartbeat
+Usage: $PROGRAM
 
     --mk, --maatkit
        Uses maatkit: mk-heartbeat
@@ -118,7 +118,7 @@ if [ $warning -gt $critical ]; then
 	die UNKNOWN "Warning level bigger than critical level"
 fi
 
-secs=$($heartbeat ${database:+-D $database} --check -h $hostname ${username:+-u $username} ${password:+-p $password} 2>&1)
+secs=$($heartbeat ${database:+-D $database} --check -h $hostname ${username:+-u $username} ${password:+-p $password} ${port:+--port $port} 2>&1)
 rc=$?
 if [ "$rc" != 0 ]; then
 	die UNKNOWN "$secs"
