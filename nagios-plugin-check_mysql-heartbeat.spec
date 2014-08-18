@@ -16,7 +16,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_sysconfdir	/etc/nagios/plugins
 %define		plugindir	%{_prefix}/lib/nagios/plugins
 
-%define		_cvsroot	:ext:cvs.delfi.ee:/usr/local/cvs
+%define		_cvsroot	:ext:cvs.delfi.net:/usr/local/cvs
 %define		_cvsmodule	nagios/plugins
 
 %description
