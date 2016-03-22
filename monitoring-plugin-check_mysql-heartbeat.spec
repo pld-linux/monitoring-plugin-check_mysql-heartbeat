@@ -4,7 +4,7 @@
 Summary:	Nagios/Icinga plugin to check MySQL heartbeat
 Name:		monitoring-plugin-%{plugin}
 Version:	1.1
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Networking
 Source0:	%{plugin}.sh
@@ -12,6 +12,7 @@ Source1:	%{plugin}.cfg
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 Requires:	nagios-common
 Requires:	nagios-plugins-libs
+Obsoletes:	nagios-plugin-check_mysql-heartbeat < 1.1
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
