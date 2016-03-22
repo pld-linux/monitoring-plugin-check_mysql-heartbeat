@@ -68,7 +68,7 @@ while :; do
 		heartbeat=mk-heartbeat
 		;;
 	--pt|--percona-toolkit)
-		heartbeat=mk-heartbeat
+		heartbeat=pt-heartbeat
 		;;
 	-c|--critical)
 		shift
