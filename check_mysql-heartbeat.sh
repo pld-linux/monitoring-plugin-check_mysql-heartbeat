@@ -124,6 +124,9 @@ if [ "$rc" != 0 ]; then
 	die UNKNOWN "$secs"
 fi
 
+# strip decimals, shell doesn't process these
+secs=${secs%[.,]*}
+
 [ $secs -gt $critical ] && die CRITICAL "$heartbeat on $hostname $secs seconds over critical treshold $critical seconds"
 [ $secs -gt $warning ] && die WARNING "$heartbeat on $hostname $secs seconds over warning treshold $warning seconds"
 
