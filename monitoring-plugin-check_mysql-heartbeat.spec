@@ -1,14 +1,14 @@
 %define		plugin	check_mysql-heartbeat
 %define		php_min_version 5.0.0
 %include	/usr/lib/rpm/macros.php
-Summary:	Nagios plugin to check MySQL heartbeat
+Summary:	Nagios/Icinga plugin to check MySQL heartbeat
 Name:		monitoring-plugin-%{plugin}
-Version:	1.0
-Release:	2
+Version:	1.1
+Release:	1
 License:	GPL v2
 Group:		Networking
-Source0:	check_mysql-heartbeat.sh
-Source1:	check_mysql-heartbeat.cfg
+Source0:	%{plugin}.sh
+Source1:	%{plugin}.cfg
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 Requires:	nagios-common
 Requires:	nagios-plugins-libs
@@ -19,7 +19,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		plugindir	%{_prefix}/lib/nagios/plugins
 
 %description
-Nagios plugin to check MySQL heartbeat with maatkit or
+Nagios/Icinga plugin to check MySQL heartbeat with maatkit or
 percona-toolkit.
 
 %prep

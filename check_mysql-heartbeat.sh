@@ -6,7 +6,7 @@
 #
 
 PROGRAM=${0##*/}
-REVISION=$(echo '$Revision$' | sed -e 's/[^0-9.]//g')
+VERSION=1.1
 PROGPATH=${0%/*}
 . $PROGPATH/utils.sh
 
@@ -61,7 +61,7 @@ while :; do
 		exit 0
 		;;
 	-V|--version)
-		echo $PROGRAM $REVISION
+		echo "$PROGRAM $VERSION"
 		exit 0
 		;;
 	--mk|--maatkit)
