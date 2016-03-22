@@ -2,7 +2,7 @@
 %define		php_min_version 5.0.0
 %include	/usr/lib/rpm/macros.php
 Summary:	Nagios plugin to check MySQL heartbeat
-Name:		nagios-plugin-%{plugin}
+Name:		monitoring-plugin-%{plugin}
 Version:	1.0
 Release:	2
 License:	GPL v2
