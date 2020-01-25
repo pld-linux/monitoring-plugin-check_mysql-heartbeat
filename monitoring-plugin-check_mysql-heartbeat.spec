@@ -1,6 +1,5 @@
 %define		plugin	check_mysql-heartbeat
 %define		php_min_version 5.0.0
-%include	/usr/lib/rpm/macros.php
 Summary:	Nagios/Icinga plugin to check MySQL heartbeat
 Name:		monitoring-plugin-%{plugin}
 Version:	1.1
